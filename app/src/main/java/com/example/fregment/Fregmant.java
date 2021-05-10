@@ -16,6 +16,7 @@ import java.util.Random;
 public class Fregmant extends Fragment {
 
     static int ColorBound =16777216;
+    int nextColor ;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,7 +29,15 @@ public class Fregmant extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         TextView textView=(TextView) view.findViewById(R.id.textView5);
         Random rand = new Random();
-        int nextColor = rand.nextInt(ColorBound);
+        nextColor = rand.nextInt(ColorBound);
         textView.setBackgroundColor(nextColor);
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextColor = rand.nextInt(ColorBound);
+                textView.setBackgroundColor(nextColor);
+            }
+        });
     }
 }
