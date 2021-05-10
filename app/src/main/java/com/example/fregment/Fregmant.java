@@ -1,5 +1,7 @@
 package com.example.fregment;
 
+import android.graphics.Color;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,8 +17,24 @@ import java.util.Random;
 
 public class Fregmant extends Fragment {
 
-    static int ColorBound =16777216;
-    int nextColor ;
+
+    private class RGBColor{
+        final int ColorBound =255;
+        int R ,G , B;
+        public void RGBColor(){
+            setRand();
+        }
+        public void setRand(){
+            Random rand = new Random();
+            R = rand.nextInt(ColorBound);
+            G = rand.nextInt(ColorBound);
+            B = rand.nextInt(ColorBound);
+        }
+        
+    }
+    RGBColor nextColor ;
+    public void Fragment(){}
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,17 +44,18 @@ public class Fregmant extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+          super.onViewCreated(view, savedInstanceState);
         TextView textView=(TextView) view.findViewById(R.id.textView5);
-        Random rand = new Random();
-        nextColor = rand.nextInt(ColorBound);
-        textView.setBackgroundColor(nextColor);
+        nextColor =new RGBColor();
+        nextColor.setRand();
+        textView.setBackgroundColor(Color.rgb(nextColor.R,nextColor.G ,nextColor.B));
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextColor = rand.nextInt(ColorBound);
-                textView.setBackgroundColor(nextColor);
+                nextColor.setRand();
+                textView.setBackgroundColor(Color.rgb(nextColor.R,nextColor.G ,nextColor.B));
+                System.out.println("sd");
             }
         });
     }
